@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angular AJAX</title>
+
+    <style>
+        table, th, td {
+            border: 2px solid red;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+        table tr:nth-child(add){
+            background-color: white;
+        }
+        td:hover{
+            background-color: rgb(242, 217, 217);
+        }
+    </style>
+</head>
+
+<body>
+    <h2> Angular JS AJAX Application</h2>
+    <div ng-app="" ng-controller="employeeController">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Salary</th>
+
+            </tr>
+            <tr ng-repeat = "employee in employees">
+                <td>{{employee.id}}</td> <!--Based from column names in emp_tbl-->
+                <td>{{employee.name}}</td>
+                <td>{{employee.age}}</td>
+                <td>{{employee.salary}}</td>
+            </tr>
+        </table>
+    </div>
+
+        <script>
+            function employeeController($scope, $http){
+                // 1st way: connected to pdc20 database 
+                var url = "http://localhost/PDC20/Module09/api_r.php"; 
+
+                // 2nd way: connected to employee text file
+                // var url = "employee.txt";
+
+                $http.get(url).success(function(response){
+                    $scope.employees = response;
+                })
+            }
+        </script>
+
+        <!-- Angular JS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+   
+</body>
+</html>
